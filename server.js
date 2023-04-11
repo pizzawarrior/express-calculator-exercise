@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 
 // __dirname makes sure the FOLDER can be 
-//found wherever it may be (on different servers)
+//found wherever it may be (on different servers/ user's machines)
 //Then the FILE path is appended to it
 app.get('/', function(req, res){
 res.sendFile(__dirname + '/index.html');
@@ -29,9 +29,9 @@ app.get('/bmicalculator', function(req, res) {
 app.post('/bmicalculator', function(req, res) {
     var weight = parseFloat(req.body.weight);
     var height = parseFloat(req.body.height);
-    
+
+        //limit decimal placs to 2 with Math.pow:
     var bmi = weight / (Math.pow(height, 2));
-    //limit decimal placs to 2:
         res.send(`Your BMI is ${bmi.toFixed(2)}`);
 });
 
